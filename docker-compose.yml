@@ -1,0 +1,29 @@
+services:
+  db:
+    build:
+      context: ./db
+    image: postgres:14-alpine
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: "mdp"
+  volatile:
+    image: redis:7.4.0
+    restart: always
+    ports:
+      - '6379:6379'
+    volumes: 
+      - cache:/data
+  # web:
+  #   build:
+  #     context: .
+  #   restart: always
+  #   ports:
+  #   - "5173:5173"
+  #   environment:
+  #     POSTGRES: "postgres://service:mdp2@127.0.0.1:5432/postgres"
+  #     SECRET: "chiffrement"
+volumes:
+  cache:
+    driver: local
