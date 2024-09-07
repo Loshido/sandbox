@@ -8,15 +8,19 @@ export default component$(() => {
 		height: 100svh;
 		display: grid;
 		grid-template-rows: auto 1fr;
+	}
+	#kashmir{ height: 70svh; }
+	@media (width < 450px) {
+		#kashmir{ height: 60svh; }
 	}`)
 
 	return <section id="home" class="grid items-center justify-center 
-		w-full h-full grid-cols-2 gap-16">
-		<div class="ml-auto relative">
-			<Kashmir id="kashmir" style="height: 75svh" class="rounded w-auto"  />
+		w-full h-full lg:grid-cols-2 gap-8 mb-16">
+		<div class="lg:ml-auto lg:mr-0 relative mx-auto">
+			<Kashmir id="kashmir" class="rounded w-auto aspect-auto"  />
 		</div>
-		<div class="text">
-			<h1 class="text-4xl font-bold max-w-lg">
+		<div class="text lg:p-0 p-8">
+			<h1 class="lg:text-4xl text-2xl font-bold max-w-lg">
 				Ce site est un laboratoire 🧪,
 				Vous y trouverez des expériences 
 			</h1>

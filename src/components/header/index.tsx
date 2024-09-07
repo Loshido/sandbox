@@ -1,11 +1,11 @@
 import { component$ } from "@builder.io/qwik";
 import { Link } from "@builder.io/qwik-city";
 
-import Fav from "~/components/contents/ico.svg?jsx"
+// import Fav from "~/components/contents/ico.svg?jsx"
 
 export default component$(() => {
-    return <header class="flex flex-row px-64 py-8 justify-between">
-        <div class="title text-4xl font-black select-none
+    return <header class="flex flex-row lg:px-64 px-4 lg:py-8 py-4 justify-between">
+        <div class="text-4xl font-black select-none
             flex flex-row gap-2 items-center">
             {/* <Fav width={16} height={16 } /> */}
             Sandbox
@@ -14,7 +14,7 @@ export default component$(() => {
             <Link 
                 href="/login"
                 prefetch={false}
-                class="px-4 py-3 bg-zinc-900 text-white hover:bg-zinc-700
+                class="lg:px-4 lg:py-3 py-2 px-3 bg-zinc-900 text-white hover:bg-zinc-700
                     transition-colors rounded">
                 Accéder au tableau de board
             </Link>

@@ -5,17 +5,17 @@ import Pillow from "~/components/contents/Mitti.jpg?jsx"
 export default component$(() => <section 
     id="login" 
     class="w-full h-svh grid
-    grid-cols-2 overflow-hidden">
+    lg:grid-cols-2 overflow-hidden">
     <Pillow 
         style={{height: "100svh"}} 
-        class="object-cover" />
-    <Slot/>
+        class="object-cover absolute lg:static -z-10 lg:z-0" />
+    <Slot />
 </section>)
 
 import type { RequestHandler } from '@builder.io/qwik-city';
 
-import { verify, sign } from "~/fn/jwt";
-import postgres from "~/db/sql"
+import { verify } from "~/fn/jwt";
+// import postgres from "~/db/sql"
 import refresh from "~/fn/refresh";
 export const onGet: RequestHandler = async (requestEvent) => {
     // Is there a token ?

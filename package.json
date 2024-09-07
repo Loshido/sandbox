@@ -7,6 +7,7 @@
   "engines-annotation": "Mostly required by sharp which needs a Node-API v9 compatible runtime",
   "private": true,
   "trustedDependencies": [
+    "esbuild",
     "sharp"
   ],
   "trustedDependencies-annotation": "Needed for bun to allow running install scripts",
@@ -31,9 +32,11 @@
   "devDependencies": {
     "@builder.io/qwik": "^1.8.0",
     "@builder.io/qwik-city": "^1.8.0",
+    "@plunk/node": "^3.0.2",
     "@types/bun": "*",
     "@types/eslint": "8.56.10",
     "@types/node": "20.14.11",
+    "@types/uuid": "^10.0.0",
     "@typescript-eslint/eslint-plugin": "7.16.1",
     "@typescript-eslint/parser": "7.16.1",
     "autoprefixer": "^10.4.14",
@@ -41,6 +44,7 @@
     "eslint-plugin-qwik": "^1.8.0",
     "hash.js": "^1.1.7",
     "jose": "^5.8.0",
+    "jsx-email": "^1.12.1",
     "postcss": "^8.4.31",
     "postgres": "^3.4.4",
     "prettier": "3.3.3",

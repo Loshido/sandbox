@@ -40,11 +40,11 @@ export const useLogin = routeAction$(async (data, requestEvent) => {
         })
 
         throw requestEvent.redirect(302, '/dash')
-    } else if(user && user.confirmed == 1) return {
+    } else if(user && user.confirmed == 0) return {
         failed: true,
         message: "⚠️ Votre adresse email n'est pas vérifié."
     }
-    else if(user && user.confirmed == 0) return {
+    else if(user && user.confirmed == 1) return {
         failed: true,
         message: "⚠️ Votre enregistrement n'est pas approuvé à ce jour."
     }
@@ -68,17 +68,20 @@ export default component$(() => {
         password: ""
     })
 
-    return <div class="p-12 grid gap-2" style="grid-template-rows: auto 1fr">
-        <div class="flex flex-row flex-wrap w-full justify-between h-1/4">
+    return <div 
+        class="xl:p-12 p-4 grid gap-2 
+        backdrop-blur-sm bg-white bg-opacity-25 h-screen" 
+        style="grid-template-rows: auto 1fr">
+        <div class="flex flex-row flex-wrap w-full justify-between h-1/4 sm:gap-0 gap-2">
             <Return />
-            <p class="text-right w-2/3">
+            <p class="text-right sm:w-2/3 w-4/5 xl:ml-0 ml-auto">
                 Ce tableau de board est un réceptacle et un chef d'orchestre 🎻 pour plusieurs projets. 
             </p>
         </div>
 
         <Form action={login}
             class="flex flex-col gap-4 py-4 items-center justify-center">
-            <label class="w-2/3 flex flex-col">
+            <label class="md:w-2/3 w-5/6 flex flex-col">
                 <input 
                     name="email"
                     onInput$={(_, el) => values.email = el.value}
@@ -97,7 +100,7 @@ export default component$(() => {
                 }
             </label>
 
-            <label class="w-2/3 flex flex-col">
+            <label class="md:w-2/3 w-5/6 flex flex-col">
                 <input 
                     name="password"
                     onInput$={(_, el) => values.password = el.value}
@@ -119,10 +122,10 @@ export default component$(() => {
             <input 
                 disabled={values.email.length < 6 || values.password.length < 6}
                 type="submit" value="Se connecter"
-                class="p-3 text-xl border-2 border-zinc-500 rounded w-2/3
+                class="p-3 text-xl border-2 border-zinc-500 rounded md:w-2/3 w-5/6
                 bg-zinc-700 text-white disabled:bg-zinc-400
                     disabled:border-zinc-100 transition-colors"/>
-            <div class="flex flex-row justify-between w-2/3">
+            <div class="flex flex-row justify-between md:w-2/3 w-5/6">
                 <Link 
                     class="font-medium hover:font-light transition-all"
                     href="/login/forgotten-password" 
@@ -139,7 +142,7 @@ export default component$(() => {
             {
                 login.value && login.value.failed
                 ? <pre style="font-family: inherit;" 
-                    class="w-2/3 p-2 border-2 rounded border-red-200 
+                    class="md:w-2/3 w-5/6 p-2 border-2 rounded border-red-200 
                     bg-red-100 whitespace-pre-wrap">
                     {
                         login.value.message

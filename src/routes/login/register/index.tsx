@@ -53,13 +53,16 @@ export default component$(() => {
         confirmation: ""
     })
 
-    return <div class="p-12 grid gap-2" style="grid-template-rows: auto 1fr">
+    return <div 
+        class="xl:p-12 p-4 grid gap-2
+        backdrop-blur-sm bg-white bg-opacity-25 h-screen" 
+        style="grid-template-rows: auto 1fr">
         <Return href="/login/" text="Revenir à la page de connexion" />
         <Form 
             action={register}
             class="flex flex-col gap-4 py-4 items-center justify-center">
 
-            <label class="w-2/3 flex flex-col ">
+            <label class="md:w-2/3 w-5/6 flex flex-col ">
                 <input 
                     name="email" value={values.email}
                     onInput$={(_, el) => values.email = el.value}
@@ -78,7 +81,7 @@ export default component$(() => {
                 }
             </label>
 
-            <label class="w-2/3 flex flex-col">
+            <label class="md:w-2/3 w-5/6 flex flex-col">
                 <input 
                     name="password" value={values.password}
                     onInput$={(_, el) => values.password = el.value}
@@ -97,7 +100,7 @@ export default component$(() => {
                 }
             </label>
 
-            <label class="w-2/3 flex flex-col">
+            <label class="md:w-2/3 w-5/6 flex flex-col">
                 <input 
                     name="confirmation" value={values.confirmation}
                     onInput$={(_, el) => values.confirmation = el.value}
@@ -123,10 +126,10 @@ export default component$(() => {
                     || register.value?.type === "success"
                 }
                 type="submit" value="Demander la création de votre compte"
-                class="p-3 text-xl border-2 border-zinc-500 rounded w-2/3
+                class="p-3 text-xl border-2 border-zinc-500 rounded md:w-2/3 w-5/6
                     bg-zinc-700 text-white disabled:bg-zinc-400
                     disabled:border-zinc-100 transition-colors"/>
-            <p class="w-2/3">
+            <p class="md:w-2/3 w-5/6">
                 Une fois votre demande faite, 
                 vous recevrez une demande de confirmation par email,
                 sous réserve que votre demande soit acceptée
@@ -138,7 +141,7 @@ export default component$(() => {
                     ? register.value.formErrors.join(" ")
                     : <pre style="font-family: inherit;" 
                         class={[
-                            "w-2/3 p-2 border-2 rounded",
+                            "md:w-2/3 w-5/6 p-2 border-2 rounded",
                             register.value.type === "failed" 
                             ? 'border-red-200 bg-red-100'
                             : 'border-zinc-200 bg-zinc-200' 

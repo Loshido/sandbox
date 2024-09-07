@@ -1,13 +1,13 @@
 services:
   db:
-    build:
-      context: ./db
     image: postgres:14-alpine
-    restart: always
     ports:
-      - "5432:5432"
+      - "5432:5432"    
+    restart: always
     environment:
       POSTGRES_PASSWORD: "mdp"
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/
   volatile:
     image: redis:7.4.0
     restart: always

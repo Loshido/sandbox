@@ -3,6 +3,8 @@
 /lib
 /lib-types
 /server
+.env
+.env-sensitive
 
 # Development
 node_modules
