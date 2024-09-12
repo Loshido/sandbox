@@ -7,8 +7,7 @@ import _try from "~/fn/try";
 import postgres from "~/db/sql"
 
 import send from "~/fn/mail/send";
-import toString from "~/fn/mail/toString";
-import PasswordReset from "~/fn/mail/templates/reset-password";
+import passwordResetMail from "~/fn/mail/templates/reset-password";
 
 type User = { 
     id: number, 
@@ -25,12 +24,7 @@ interface MailService {
 export const useRequestPasswordChange = routeAction$(async (data, requestEvent) => {
     const sql = postgres(requestEvent)
 
-    // identification de la demande
-    const entries = {
-        type: "password-reset"
-    }
-
-    const [ response, error ] = await _try(async () => {
+    const [ response ] = await _try(async () => {
         // Prendre toutes les demandes et/ou l'identifiant de l'utilisateur
         const users = await sql<User[]>`SELECT u.id, m.type
             FROM users u
@@ -42,22 +36,21 @@ export const useRequestPasswordChange = routeAction$(async (data, requestEvent) 
             throw new Error(`There is no user with email = ${data.email}`)
         
         // Si le nombre de demandes dépasse 5, on n'envoie pas de mails
-        if(users.length >= 5 || !users[0]?.id) 
+        if(users.length >= 5 || !users[0].id) 
             return []
 
         // On ajoute la demande pour la retrouver antérieurement
         const response = 
             await sql<[ MailService ]>`INSERT INTO mail_service ${ sql({
                 type: 'password-reset',
-                user_id: users[0]?.id
+                user_id: users[0].id
             })} RETURNING *;`;
         return [...response];
     })
 
     if(response && response.length === 1) {
         // Template prédéfini pour réinitialiser le mot de passe
-        const body = await toString(<PasswordReset 
-            reset_url={`http://localhost:5173/api/password_reset?token=${response[0].token}`}/>)
+        const body = passwordResetMail(`http://localhost:5173/api/password_reset?token=${response[0].token}`)
         await send({
             to: data.email,
             subject: "Sandbox - Réinitialisation de mot de passe",
@@ -120,7 +113,7 @@ export default component$(() => {
                 ? <pre style="font-family: inherit;" 
                     class="md:w-2/3 w-5/6 p-2 border-2 rounded border-zinc-200 
                     bg-zinc-100 whitespace-pre-wrap">
-                    {requestPasswordChange.value?.message}
+                    {requestPasswordChange.value.message}
                 </pre>
                 : null
             }

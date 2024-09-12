@@ -1,8 +1,7 @@
-import type { RequestHandler } from '@builder.io/qwik-city';
+import type { RequestHandler, DocumentHead } from '@builder.io/qwik-city';
 
 import refresh from '~/fn/refresh';
-import { verify, sign } from "~/fn/jwt";
-import postgres from "~/db/sql"
+import { verify } from "~/fn/jwt";
 export const onGet: RequestHandler = async (requestEvent) => {
     // Is there a token ?
     const jwt = requestEvent.cookie.get('jwt')
@@ -27,3 +26,10 @@ export const onGet: RequestHandler = async (requestEvent) => {
     // Refresh tokens
     await refresh(refreshPayload, requestEvent);
 };
+
+export const head: DocumentHead = (props) => ({
+	title: `dashboard`,
+	frontmatter: {
+        header: false
+    }
+});

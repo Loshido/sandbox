@@ -19,7 +19,7 @@ export async function verify(jwt: string, requestEvent: RequestEvent | RequestEv
         audience: "sandbox-users",
         issuer: "sandbox-loshido"
     }))
-    return result?.payload as Payload || undefined
+    return result ? result.payload as Payload : undefined
 }
 
 export function decode(jwt: string) {

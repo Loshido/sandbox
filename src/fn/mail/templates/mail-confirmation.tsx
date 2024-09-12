@@ -1,10 +1,4 @@
-import { component$ } from "@builder.io/qwik";
-
-type MailConfirmation = {
-    confirmation_url: string
-}
-
-export default component$(({ confirmation_url }: MailConfirmation) => {
+export const MailConfirm = () => {
     const style = {
         h1: [
             "font-size: 2.25rem",
@@ -17,12 +11,12 @@ export default component$(({ confirmation_url }: MailConfirmation) => {
         ]
     }
     
-    return <body style="font-family: sans-serif;">
+    return `<body style="font-family: sans-serif;">
         <h1>
             Confirmation de votre adresse mail Sandbox
         </h1>
 
-        <a href={confirmation_url}>
+        <a href="$$$$$">
             Cliquer ici pour confirmer que votre adresse mail est active.
         </a>
 
@@ -34,12 +28,18 @@ export default component$(({ confirmation_url }: MailConfirmation) => {
         </p>
 
         <footer>
-            <h1 style={style.h1.join(';')}>Sandbox</h1>
-            <p style={style.p.join(';')}>
+            <h1 style="${style.h1.join(';')}">Sandbox</h1>
+            <p style="${style.p.join(';')}">
                 Livio Ardoin (<a href="mailto:contact@aruni.space">
                     contact@aruni.space
                 </a>)
             </p>
         </footer>
-    </body>
-})
+    </body>`
+}
+
+export default async (confirmation_ur: string) => {
+    const str = MailConfirm()
+    str.replace('$$$$$', confirmation_ur)
+    return str
+}

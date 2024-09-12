@@ -1,10 +1,4 @@
-import { component$ } from "@builder.io/qwik";
-
-type PasswordReset = {
-    reset_url: string
-}
-
-export default component$(({ reset_url }: PasswordReset) => {
+export const PasswordReset = () => {
     const style = {
         h1: [
             "font-size: 2.25rem",
@@ -17,12 +11,12 @@ export default component$(({ reset_url }: PasswordReset) => {
         ]
     }
     
-    return <body style="font-family: sans-serif;">
+    return `<body style="font-family: sans-serif;">
         <h1>
             Réinitialiser votre mot de passe Sandbox
         </h1>
 
-        <a href={reset_url}>
+        <a href="$$$$$">
             Cliquer ici pour réinitialiser votre mot de passe
         </a>
 
@@ -32,12 +26,18 @@ export default component$(({ reset_url }: PasswordReset) => {
         </p>
 
         <footer>
-            <h1 style={style.h1.join(';')}>Sandbox</h1>
-            <p style={style.p.join(';')}>
+            <h1 style="${style.h1.join(';')}">Sandbox</h1>
+            <p style="${style.p.join(';')}">
                 Livio Ardoin (<a href="mailto:contact@aruni.space">
                     contact@aruni.space
                 </a>)
             </p>
         </footer>
-    </body>
-})
+    </body>`
+}
+
+export default (reset_url: string) => {
+    const str = PasswordReset()
+    str.replace('$$$$$', reset_url)
+    return str
+}
