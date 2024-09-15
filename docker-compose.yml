@@ -15,15 +15,20 @@ services:
       - '6379:6379'
     volumes: 
       - cache:/data
-  # web:
-  #   build:
-  #     context: .
-  #   restart: always
-  #   ports:
-  #   - "5173:5173"
-  #   environment:
-  #     POSTGRES: "postgres://service:mdp2@127.0.0.1:5432/postgres"
-  #     SECRET: "chiffrement"
+  web:
+    build:
+      context: .
+    restart: always
+    ports:
+    - "5173:5173"
+    environment:
+      POSTGRES: "postgres://service:mdp2@127.0.0.1:5432/postgres"
+      SECRET: "chiffrement"
+      REDIS: "redis://localhost:6379"
+      TLS_KEY: "./keys/server-key.pem"
+      TLS_CERT: "./keys/server-cert.pem"
+    volumes:
+      - ./.keys:/app/keys
 volumes:
   cache:
     driver: local

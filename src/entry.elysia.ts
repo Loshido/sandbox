@@ -54,9 +54,14 @@ const app = new Elysia({
 		if (qwikCityResponse) {
 			return qwikCityResponse;
 		}
-	
+
 		// Path not found
 		return notFound(request);
+	})
+	.onError((handler) => {
+		if(handler.code === "NOT_FOUND") {
+			return Bun.file('./dist/404.html')
+		}	
 	})
 	.listen(port, (server) => {
 		console.info(`Elysia started on ${server.url}`)
