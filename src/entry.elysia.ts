@@ -1,10 +1,10 @@
 /*
  * WHAT IS THIS FILE?
  *
- * It's the entry point for Elysia when building for production.
+ * It's the entry point for Elysiajs when building for production.
  *
- * Learn more about the Elysia integration here:
- * - https://qwik.dev/docs/deployments/elysia/
+ * Learn more about the Elysiajs integration here:
+ * - https://qwik.dev/docs/deployments/elysia/ ?
  * - https://elysiajs.com/at-glance.html
  *
  */
@@ -26,6 +26,7 @@ const { router, notFound, staticFile } = createQwikCity({
 // Allow for dynamic port
 const port = Number(Bun.env.PORT ?? 5173);
 
+// Allow HTTPS
 const tls: TLSOptions = {
 	key: Bun.env.TLS_KEY ? Bun.file(Bun.env.TLS_KEY) : undefined,
 	cert: Bun.env.TLS_CERT ? Bun.file(Bun.env.TLS_CERT) : undefined,
@@ -61,8 +62,15 @@ const app = new Elysia({
 		console.info(`Elysia started on ${server.url}`)
 	})
 
-process.on('SIGINT', () => {
+const stop = () => {
 	app.stop(true)
-	console.log(`Elysia stopped`)
+	console.info(`Elysia stopped`)
 	process.exit()
-})
+}
+
+// Ctrl + c signal
+process.on('SIGINT', stop)
+
+// Docker's container stop signal
+process.on('SIGTERM', stop)
+process.on('SIGKILL', stop) 

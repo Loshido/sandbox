@@ -19,7 +19,7 @@ export default extendConfig(baseConfig, () => {
       bunServerAdapter({
         ssg: {
           include: ["/*"],
-          origin: "http://localhost:5173",
+          origin: "https://localhost:5173",
           maxWorkers: 1, // Limit Workers to 1, otherwise SSG will hang when compiling Qwik City app with `bun run --bun build`.
         },
       }),

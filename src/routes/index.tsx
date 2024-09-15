@@ -42,7 +42,7 @@ export default component$(() => {
 });
 
 export const head: DocumentHead = {
-	title: "Sandbox - Home",
+	title: "Home",
 	meta: [
 		{
 			name: "description",
