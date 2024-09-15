@@ -5,11 +5,12 @@ import { Link } from "@builder.io/qwik-city";
 
 export default component$(() => {
     return <header class="flex flex-row lg:px-64 px-4 lg:py-8 py-4 justify-between">
-        <div class="text-4xl font-black select-none
+        <Link href="/"
+            class="text-4xl font-black select-none
             flex flex-row gap-2 items-center">
             {/* <Fav width={16} height={16 } /> */}
             Sandbox
-        </div>
+        </Link>
         <nav class="flex flex-row gap-2">
             <Link 
                 href="/login"

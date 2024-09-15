@@ -20,4 +20,13 @@
 body{
     width: 100%;
     height: 100%;
+    font-family: 'lexend';
+}
+
+body:has(#page-404) {
+    width: 100svw;
+    height: 100svh;
+
+    display: grid;
+    grid-template-rows: auto 1fr;
 }
