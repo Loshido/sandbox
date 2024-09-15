@@ -3,6 +3,7 @@
   "devDependencies": {
     "@builder.io/qwik": "^1.8.0",
     "@builder.io/qwik-city": "^1.8.0",
+    "@elysiajs/static": "^1.1.1",
     "@plunk/node": "^3.0.2",
     "@types/bun": "*",
     "@types/eslint": "8.56.10",
@@ -11,6 +12,7 @@
     "@typescript-eslint/eslint-plugin": "7.16.1",
     "@typescript-eslint/parser": "7.16.1",
     "autoprefixer": "^10.4.14",
+    "elysia": "^1.1.12",
     "eslint": "8.57.0",
     "eslint-plugin-qwik": "^1.8.0",
     "hash.js": "^1.1.7",
@@ -37,7 +39,7 @@
     "build": "qwik build",
     "build.client": "vite build",
     "build.preview": "vite build --ssr src/entry.preview.tsx",
-    "build.server": "vite build -c adapters/bun/vite.config.ts",
+    "build.server": "vite build -c adapters/elysia/vite.config.ts",
     "build.types": "tsc --incremental --noEmit",
     "deploy": "echo 'Run \"npm run qwik add\" to install a server adapter'",
     "dev": "vite --mode ssr",
@@ -46,7 +48,7 @@
     "fmt.check": "prettier --check .",
     "lint": "eslint \"src/**/*.ts*\"",
     "preview": "qwik build preview && vite preview --open",
-    "serve": "bun server/entry.bun.js",
+    "serve": "bun server/entry.elysia.js",
     "start": "vite --open --mode ssr",
     "qwik": "qwik"
   },

@@ -5,6 +5,7 @@
 /server
 .env
 .env-sensitive
+.keys
 
 # Development
 node_modules

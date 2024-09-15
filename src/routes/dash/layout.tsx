@@ -27,7 +27,7 @@ export const onGet: RequestHandler = async (requestEvent) => {
     await refresh(refreshPayload, requestEvent);
 };
 
-export const head: DocumentHead = (props) => ({
+export const head: DocumentHead = () => ({
 	title: `dashboard`,
 	frontmatter: {
         header: false
